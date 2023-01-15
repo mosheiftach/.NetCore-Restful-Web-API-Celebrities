@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Data.HashFunction.FNV</name>
+    </assembly>
+    <members>
+        <member name="T:System.Data.HashFunction.FNV.FNV1aFactory">
+            <summary>
+            Provides instances of implementations of <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/>.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNV1aFactory.Instance">
+            <summary>
+            Gets the singleton instance of this factory.
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1aFactory.Create">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance with the default configuration.
+            </summary>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance.</returns>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1aFactory.Create(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance with the specified configuration.
+            </summary>
+            <param name="config">Configuration to use when constructing the instance.</param>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.FNV1a_Implementation">
+            <summary>
+            Implementation of Fowler–Noll–Vo hash function (FNV-1a) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html. 
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1a_Implementation.#ctor(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Data.HashFunction.FNV.FNV1a_Implementation"/> class.
+            </summary>
+            <inheritdoc cref="M:System.Data.HashFunction.FNV.FNV1Base.#ctor(System.Data.HashFunction.FNV.IFNVConfig)" />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1a_Implementation.ProcessBytes(System.UInt32[]@,System.Collections.Generic.IReadOnlyList{System.UInt32},System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1a_Implementation.ProcessBytes32(System.UInt32@,System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1a_Implementation.ProcessBytes64(System.UInt64@,System.UInt64,System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.FNV1Base">
+            <summary>
+            Abstract implementation of Fowler–Noll–Vo hash function (FNV-1 and FNV-1a) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNV1Base.Config">
+            <summary>
+            Configuration used when creating this instance.
+            </summary>
+            <value>
+            A clone of configuration that was used when creating this instance.
+            </value>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.#ctor(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Data.HashFunction.FNV.FNV1Base"/> class.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"><paramref name="config"/></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.HashSizeInBits"/>;<paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.HashSizeInBits"/> must be a positive a multiple of 32.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.Prime"/>;<paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.Prime"/> must be non-zero.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.Offset"/>;<paramref name="config"/>.<see cref="P:System.Data.HashFunction.FNV.IFNVConfig.Offset"/> must be non-zero.</exception>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ComputeHashInternal(System.Data.HashFunction.Core.Utilities.UnifiedData.IUnifiedData,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ComputeHashAsyncInternal(System.Data.HashFunction.Core.Utilities.UnifiedData.IUnifiedDataAsync,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ProcessBytes32(System.UInt32@,System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Apply 32-bit FNV algorithm on all data supplied.
+            </summary>
+            <param name="hash">Hash value before calculations.</param>
+            <param name="prime">FNV prime to use for calculations.</param>
+            <param name="data">Data to process.</param>
+            <param name="position">The starting index of the data array.</param>
+            <param name="length">The length of the data in the data array, starting from the position parameter.</param>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ProcessBytes64(System.UInt64@,System.UInt64,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Apply 64-bit FNV algorithm on all data supplied.
+            </summary>
+            <param name="hash">Hash value before calculations.</param>
+            <param name="prime">FNV prime to use for calculations.</param>
+            <param name="data">Data to process.</param>
+            <param name="position">The starting index of the data array.</param>
+            <param name="length">The length of the data in the data array, starting from the position parameter.</param>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ProcessBytes(System.UInt32[]@,System.Collections.Generic.IReadOnlyList{System.UInt32},System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Apply FNV algorithm on all data supplied.
+            </summary>
+            <param name="hash">Hash value before calculations.</param>
+            <param name="prime">FNV prime to use for calculations.</param>
+            <param name="data">Data to process.</param>
+            <param name="position">The starting index of the data array.</param>
+            <param name="length">The length of the data in the data array, starting from the position parameter.</param>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Base.ExtendedMultiply(System.Collections.Generic.IReadOnlyList{System.UInt32},System.Collections.Generic.IReadOnlyList{System.UInt32},System.Int32)">
+            <summary>
+            Multiplies operand1 by operand2 as if both operand1 and operand2 were single large integers.
+            </summary>
+            <param name="operand1">Array of UInt32 values to be multiplied.</param>
+            <param name="operand2">Array of UInt32 values to multiply by.</param>
+            <param name="hashSizeInBytes">Hash size, in bytes, to truncate products at.</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.FNV1Factory">
+            <summary>
+            Provides instances of implementations of <see cref="T:System.Data.HashFunction.FNV.IFNV1"/>.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNV1Factory.Instance">
+            <summary>
+            Gets the singleton instance of this factory.
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Factory.Create">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance with the default configuration.
+            </summary>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance.</returns>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1Factory.Create(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance with the specified configuration.
+            </summary>
+            <param name="config">Configuration to use when constructing the instance.</param>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.FNV1_Implementation">
+            <summary>
+            Implementation of Fowler–Noll–Vo hash function (FNV-1) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html. 
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1_Implementation.#ctor(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Data.HashFunction.FNV.FNV1_Implementation"/> class.
+            </summary>
+            <inheritdoc cref="M:System.Data.HashFunction.FNV.FNV1Base.#ctor(System.Data.HashFunction.FNV.IFNVConfig)" />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1_Implementation.ProcessBytes(System.UInt32[]@,System.Collections.Generic.IReadOnlyList{System.UInt32},System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1_Implementation.ProcessBytes32(System.UInt32@,System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNV1_Implementation.ProcessBytes64(System.UInt64@,System.UInt64,System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.FNVConfig">
+            <summary>
+            Defines a configuration for a <see cref="T:System.Data.HashFunction.FNV.IFNV"/> implementation.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNVConfig.HashSizeInBits">
+            <summary>
+            Length of the produced hash, in bits.
+            </summary>
+            <value>
+            The length of the produced hash, in bits
+            </value>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNVConfig.Prime">
+            <summary>
+            The prime integer to use when calculating the FNV value.
+            </summary>
+            <value>
+            The prime value.
+            </value>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.FNVConfig.Offset">
+            <summary>
+            The offset integer to use when calculating the FNV value.
+            </summary>
+            <value>
+            The offset value.
+            </value>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNVConfig.Clone">
+            <summary>
+            Makes a deep clone of current instance.
+            </summary>
+            <returns>A deep clone of the current instance.</returns>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.FNVConfig.GetPredefinedConfig(System.Int32)">
+            <summary>
+            Gets one of the predefined configurations as defined at http://www.isthe.com/chongo/tech/comp/fnv/index.html.
+            </summary>
+            <param name="hashSizeInBits">The desired hash length, in bits.</param>
+            <returns>The predefined configuration instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNV">
+            <summary>
+            Implementation of Fowler–Noll–Vo hash function (FNV-1 or FNV-1a) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html. 
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.IFNV.Config">
+            <summary>
+            Configuration used when creating this instance.
+            </summary>
+            <value>
+            A clone of configuration that was used when creating this instance.
+            </value>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNV1">
+            <summary>
+            Implementation of Fowler–Noll–Vo hash function (FNV-1) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html. 
+            </summary>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNV1a">
+            <summary>
+            Implementation of Fowler–Noll–Vo hash function (FNV-1a) as specified at http://www.isthe.com/chongo/tech/comp/fnv/index.html. 
+            </summary>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNV1aFactory">
+            <summary>
+            Provides instances of implementations of <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/>.
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.IFNV1aFactory.Create">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance with the default configuration.
+            </summary>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance.</returns>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.IFNV1aFactory.Create(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance with the specified configuration.
+            </summary>
+            <param name="config">Configuration to use when constructing the instance.</param>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1a"/> instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNV1Factory">
+            <summary>
+            Provides instances of implementations of <see cref="T:System.Data.HashFunction.FNV.IFNV1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.IFNV1Factory.Create">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance with the default configuration.
+            </summary>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance.</returns>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.IFNV1Factory.Create(System.Data.HashFunction.FNV.IFNVConfig)">
+            <summary>
+            Creates a new <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance with the specified configuration.
+            </summary>
+            <param name="config">Configuration to use when constructing the instance.</param>
+            <returns>A <see cref="T:System.Data.HashFunction.FNV.IFNV1"/> instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.IFNVConfig">
+            <summary>
+            Defines a configuration for a <see cref="T:System.Data.HashFunction.FNV.IFNV"/> implementation.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.IFNVConfig.HashSizeInBits">
+            <summary>
+            Length of the produced hash, in bits.
+            </summary>
+            <value>
+            The length of the produced hash, in bits
+            </value>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.IFNVConfig.Prime">
+            <summary>
+            The prime integer to use when calculating the FNV value.
+            </summary>
+            <value>
+            The prime value.
+            </value>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.IFNVConfig.Offset">
+            <summary>
+            The offset integer to use when calculating the FNV value.
+            </summary>
+            <value>
+            The offset value.
+            </value>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.IFNVConfig.Clone">
+            <summary>
+            Makes a deep clone of current instance.
+            </summary>
+            <returns>A deep clone of the current instance.</returns>
+        </member>
+        <member name="T:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset">
+            <summary>
+            Class for storing FNV prime and offset combinations.
+            
+            Values specified as System.Numerics.BigInteger, converted to collections of UInt32 values.
+            </summary>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset.Prime">
+            <summary>
+            FNV prime number as an <see cref="T:System.Collections.Generic.IReadOnlyList`1" />.
+            </summary>
+            <value>
+            The prime number as an <see cref="T:System.Collections.Generic.IReadOnlyList`1" />.
+            </value>
+        </member>
+        <member name="P:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset.Offset">
+            <summary>
+            FNV offset as an <see cref="T:System.Collections.Generic.IReadOnlyList`1" />.
+            </summary>
+            <value>
+            The offset as an <see cref="T:System.Collections.Generic.IReadOnlyList`1" />.
+            </value>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset.#ctor(System.Collections.Generic.IReadOnlyList{System.UInt32},System.Collections.Generic.IReadOnlyList{System.UInt32})">
+            <summary>
+            Initializes a new instance of <see cref="T:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset"/>.
+            </summary>
+            <param name="prime">Prime value to be represented.</param>
+            <param name="offset">Offset value to be represented.</param>
+        </member>
+        <member name="M:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset.Create(System.Int32,System.Numerics.BigInteger,System.Numerics.BigInteger)">
+            <summary>
+            Creates a new instance of <see cref="T:System.Data.HashFunction.FNV.Utilities.FNVPrimeOffset"/>.
+            </summary>
+            <param name="bitSize">Number of bits the prime and offset use each.</param>
+            <param name="prime">Prime integer to be represented.</param>
+            <param name="offset">Offset integer to be represented.</param>
+        </member>
+    </members>
+</doc>
